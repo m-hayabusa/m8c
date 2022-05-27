@@ -94,6 +94,9 @@ void close_game_controllers() {
 static input_msg_s handle_keyjazz(SDL_Event *event, uint8_t keyvalue) {
   input_msg_s key = {keyjazz, keyvalue, keyjazz_velocity, event->type};
   switch (event->key.keysym.scancode) {
+  case SDL_SCANCODE_LSHIFT:
+    key.value = -1 + keyjazz_base_octave * 12;
+    break;
   case SDL_SCANCODE_Z:
     key.value = keyjazz_base_octave * 12;
     break;
@@ -130,16 +133,34 @@ static input_msg_s handle_keyjazz(SDL_Event *event, uint8_t keyvalue) {
   case SDL_SCANCODE_M:
     key.value = 11 + keyjazz_base_octave * 12;
     break;
+  case SDL_SCANCODE_COMMA:
+    key.value = 12 + keyjazz_base_octave * 12;
+    break;
+  case SDL_SCANCODE_L:
+    key.value = 13 + keyjazz_base_octave * 12;
+    break;
+  case SDL_SCANCODE_PERIOD:
+    key.value = 14 + keyjazz_base_octave * 12;
+    break;
+  case SDL_SCANCODE_SEMICOLON:
+    key.value = 15 + keyjazz_base_octave * 12;
+    break;
+  case SDL_SCANCODE_SLASH:
+    key.value = 16 + keyjazz_base_octave * 12;
+    break;
+  case SDL_SCANCODE_ESCAPE:
+    key.value = 11 + keyjazz_base_octave * 12;
+    break;
   case SDL_SCANCODE_Q:
     key.value = 12 + keyjazz_base_octave * 12;
     break;
-  case SDL_SCANCODE_2:
+  case SDL_SCANCODE_1:
     key.value = 13 + keyjazz_base_octave * 12;
     break;
   case SDL_SCANCODE_W:
     key.value = 14 + keyjazz_base_octave * 12;
     break;
-  case SDL_SCANCODE_3:
+  case SDL_SCANCODE_2:
     key.value = 15 + keyjazz_base_octave * 12;
     break;
   case SDL_SCANCODE_E:
@@ -148,19 +169,19 @@ static input_msg_s handle_keyjazz(SDL_Event *event, uint8_t keyvalue) {
   case SDL_SCANCODE_R:
     key.value = 17 + keyjazz_base_octave * 12;
     break;
-  case SDL_SCANCODE_5:
+  case SDL_SCANCODE_4:
     key.value = 18 + keyjazz_base_octave * 12;
     break;
   case SDL_SCANCODE_T:
     key.value = 19 + keyjazz_base_octave * 12;
     break;
-  case SDL_SCANCODE_6:
+  case SDL_SCANCODE_5:
     key.value = 20 + keyjazz_base_octave * 12;
     break;
   case SDL_SCANCODE_Y:
     key.value = 21 + keyjazz_base_octave * 12;
     break;
-  case SDL_SCANCODE_7:
+  case SDL_SCANCODE_6:
     key.value = 22 + keyjazz_base_octave * 12;
     break;
   case SDL_SCANCODE_U:
@@ -169,33 +190,36 @@ static input_msg_s handle_keyjazz(SDL_Event *event, uint8_t keyvalue) {
   case SDL_SCANCODE_I:
     key.value = 24 + keyjazz_base_octave * 12;
     break;
-  case SDL_SCANCODE_9:
+  case SDL_SCANCODE_8:
     key.value = 25 + keyjazz_base_octave * 12;
     break;
   case SDL_SCANCODE_O:
     key.value = 26 + keyjazz_base_octave * 12;
     break;
-  case SDL_SCANCODE_0:
+  case SDL_SCANCODE_9:
     key.value = 27 + keyjazz_base_octave * 12;
     break;
   case SDL_SCANCODE_P:
     key.value = 28 + keyjazz_base_octave * 12;
     break;
-  case SDL_SCANCODE_KP_DIVIDE:
+  case SDL_SCANCODE_BACKSLASH:
+    key.value = 29 + keyjazz_base_octave * 12;
+    break;
+  case SDL_SCANCODE_LEFTBRACKET:
     key.type = normal;
     if (event->type == SDL_KEYDOWN && keyjazz_base_octave > 0) {
       keyjazz_base_octave--;
       display_keyjazz_overlay(1, keyjazz_base_octave, keyjazz_velocity);
     }
     break;
-  case SDL_SCANCODE_KP_MULTIPLY:
+  case SDL_SCANCODE_RIGHTBRACKET:
     key.type = normal;
     if (event->type == SDL_KEYDOWN && keyjazz_base_octave < 8) {
       keyjazz_base_octave++;
       display_keyjazz_overlay(1, keyjazz_base_octave, keyjazz_velocity);
     }
     break;
-  case SDL_SCANCODE_KP_MINUS:
+  case SDL_SCANCODE_MINUS:
     key.type = normal;
     if (event->type == SDL_KEYDOWN) {
       if ((event->key.keysym.mod & KMOD_ALT) > 0) {
@@ -208,7 +232,7 @@ static input_msg_s handle_keyjazz(SDL_Event *event, uint8_t keyvalue) {
       display_keyjazz_overlay(1, keyjazz_base_octave, keyjazz_velocity);
     }
     break;
-  case SDL_SCANCODE_KP_PLUS:
+  case SDL_SCANCODE_EQUALS:
     key.type = normal;
     if (event->type == SDL_KEYDOWN) {
       if ((event->key.keysym.mod & KMOD_ALT) > 0) {
@@ -397,7 +421,7 @@ void handle_sdl_events(config_params_s *conf) {
     }
 
     // ESC = toggle keyjazz
-    if (event.key.keysym.sym == SDLK_ESCAPE) {
+    if (event.key.keysym.sym == SDLK_TAB) {
       display_keyjazz_overlay(toggle_input_keyjazz(), keyjazz_base_octave, keyjazz_velocity);
     }
 
