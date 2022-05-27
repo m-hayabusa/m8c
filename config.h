@@ -33,6 +33,8 @@ typedef struct config_params_s {
   int gamepad_right;
   int gamepad_select;
   int gamepad_start;
+  int gamepad_select2;
+  int gamepad_start2;
   int gamepad_opt;
   int gamepad_edit;
 

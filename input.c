@@ -268,10 +268,11 @@ static int get_game_controller_button(config_params_s *conf,
                                       SDL_GameController *controller,
                                       int button) {
 
-  const int button_mappings[8] = {conf->gamepad_up,     conf->gamepad_down,
-                                  conf->gamepad_left,   conf->gamepad_right,
-                                  conf->gamepad_opt,    conf->gamepad_edit,
-                                  conf->gamepad_select, conf->gamepad_start};
+  const int button_mappings[10] = {conf->gamepad_up,      conf->gamepad_down,
+                                  conf->gamepad_left,    conf->gamepad_right,
+                                  conf->gamepad_opt,     conf->gamepad_edit,
+                                  conf->gamepad_select,  conf->gamepad_start,
+                                  conf->gamepad_select2, conf->gamepad_start2};
 
   // Check digital buttons
   if (SDL_GameControllerGetButton(controller, button_mappings[button])) {
@@ -322,8 +323,8 @@ static int get_game_controller_button(config_params_s *conf,
 // cycle
 static int handle_game_controller_buttons(config_params_s *conf) {
 
-  const int keycodes[8] = {key_up,  key_down, key_left,   key_right,
-                           key_opt, key_edit, key_select, key_start};
+  const int keycodes[10] = {key_up,  key_down, key_left,   key_right,
+                            key_opt, key_edit, key_select, key_start, key_select, key_start};
 
   int key = 0;
 

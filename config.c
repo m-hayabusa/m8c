@@ -47,6 +47,8 @@ config_params_s init_config() {
   c.gamepad_right = SDL_CONTROLLER_BUTTON_DPAD_RIGHT;
   c.gamepad_select = SDL_CONTROLLER_BUTTON_BACK;
   c.gamepad_start = SDL_CONTROLLER_BUTTON_START;
+  c.gamepad_select2 = SDL_CONTROLLER_BUTTON_X;
+  c.gamepad_start2 = SDL_CONTROLLER_BUTTON_Y;
   c.gamepad_opt = SDL_CONTROLLER_BUTTON_B;
   c.gamepad_edit = SDL_CONTROLLER_BUTTON_A;
 
@@ -72,7 +74,7 @@ void write_config(config_params_s *conf) {
 
   SDL_Log("Writing config file to %s", config_path);
 
-  const unsigned int INI_LINE_COUNT = 36;
+  const unsigned int INI_LINE_COUNT = 38;
 
   // Entries for the config file
   char ini_values[INI_LINE_COUNT][50];
@@ -105,6 +107,8 @@ void write_config(config_params_s *conf) {
   sprintf(ini_values[initPointer++], "gamepad_right=%d\n", conf->gamepad_right);
   sprintf(ini_values[initPointer++], "gamepad_select=%d\n", conf->gamepad_select);
   sprintf(ini_values[initPointer++], "gamepad_start=%d\n", conf->gamepad_start);
+  sprintf(ini_values[initPointer++], "gamepad_select2=%d\n", conf->gamepad_select2);
+  sprintf(ini_values[initPointer++], "gamepad_start2=%d\n", conf->gamepad_start2);
   sprintf(ini_values[initPointer++], "gamepad_opt=%d\n", conf->gamepad_opt);
   sprintf(ini_values[initPointer++], "gamepad_edit=%d\n", conf->gamepad_edit);
   sprintf(ini_values[initPointer++], "gamepad_analog_threshold=%d\n",
@@ -248,6 +252,8 @@ void read_gamepad_config(ini_t *ini, config_params_s *conf) {
   const char *gamepad_right = ini_get(ini, "gamepad", "gamepad_right");
   const char *gamepad_select = ini_get(ini, "gamepad", "gamepad_select");
   const char *gamepad_start = ini_get(ini, "gamepad", "gamepad_start");
+  const char *gamepad_select2 = ini_get(ini, "gamepad", "gamepad_select2");
+  const char *gamepad_start2 = ini_get(ini, "gamepad", "gamepad_start2");
   const char *gamepad_opt = ini_get(ini, "gamepad", "gamepad_opt");
   const char *gamepad_edit = ini_get(ini, "gamepad", "gamepad_edit");
   const char *gamepad_analog_threshold =
@@ -279,6 +285,10 @@ void read_gamepad_config(ini_t *ini, config_params_s *conf) {
     conf->gamepad_select = SDL_atoi(gamepad_select);
   if (gamepad_start)
     conf->gamepad_start = SDL_atoi(gamepad_start);
+  if (gamepad_select2)
+    conf->gamepad_select2 = SDL_atoi(gamepad_select2);
+  if (gamepad_start2)
+    conf->gamepad_start2 = SDL_atoi(gamepad_start2);
   if (gamepad_opt)
     conf->gamepad_opt = SDL_atoi(gamepad_opt);
   if (gamepad_edit)
