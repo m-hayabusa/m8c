@@ -34,9 +34,9 @@ config_params_s init_config() {
   c.key_select_alt = SDL_SCANCODE_A;
   c.key_start = SDL_SCANCODE_SPACE;
   c.key_start_alt = SDL_SCANCODE_S;
-  c.key_opt = SDL_SCANCODE_LALT;
+  c.key_opt = -1;
   c.key_opt_alt = SDL_SCANCODE_Z;
-  c.key_edit = SDL_SCANCODE_LCTRL;
+  c.key_edit = -1;
   c.key_edit_alt = SDL_SCANCODE_X;
   c.key_delete = SDL_SCANCODE_DELETE;
   c.key_reset = SDL_SCANCODE_R;
