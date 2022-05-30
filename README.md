@@ -80,30 +80,56 @@ Keys for controlling the progam:
 * Right arrow = right
 * a / left shift = select
 * s / space = start
-* z / left alt = opt
-* x / left ctrl = edit
+* z = opt
+* x = edit
 
 Additional controls:
 * Alt + enter = toggle full screen / windowed
 * Alt + F4 = quit program
 * Delete = opt+edit (deletes a row)
-* Esc = toggle keyjazz on/off 
+* Tab = toggle keyjazz on/off 
 * r / select+start+opt+edit = reset display (if glitches appear on the screen, use this)
 
 ### Keyjazz
 Keyjazz allows to enter notes with keyboard, oldschool tracker-style. The layout is two octaves, starting from keys Z and Q.
 When keyjazz is active, regular a/s/z/x keys are disabled. The base octave can be adjusted with numpad star/divide keys and the velocity can be set 
 
-* Numpad asterisk (\*): increase base octave
-* Numpad divide (/): decrease base ooctave
-* Numpad plus (+): increase velocity
-* Numpad minus (-): decrease velocity
+* [: increase base octave
+* ]: decrease base octave
+* -: increase velocity 0x10
+* =: decrease velocity 0x10
+* Left Alt and -/=: inc/dec velocity 0x01
+
+#### with fcitx-skk
+`SDL_IM_MODULE=none m8c` のようにしないとキー入力がm8cに送られないようです。
+
+```
+alias m8c="SDL_IM_MODULE=none /usr/local/bin/m8c"
+```
+を`~/.profiles`などに追記しておくのがおすすめです。
 
 ## Gamepads
 
 The program uses SDL's game controller system, which should make it work automagically with most gamepads. On startup, the program tries to load a SDL game controller database named gamecontrollerdb.txt from the same directory as the config file. If your joypad doesn't work out of the box, you might need to create custom bindings to this file, for example with [SDL2 Gamepad Tool](https://generalarcade.com/gamepadtool/).
 
 Enjoy making some nice music!
+
+### to use DevTerm's Gamepad
+You need to add
+```
+export SDL_GAMECONTROLLERCONFIG="03000000af1e00002400000010010000,ClockworkPI DevTerm,platform:Linux,a:b1,b:b2,x:b3,y:b0,back:b8,start:b9,leftx:a0,lefty:a1,"
+```
+to `~.profile`
+( https://forum.clockworkpi.com/t/fixing-detected-gamepad-in-some-games/7729 )
+
+* Hat Up = up
+* Hat Down = down
+* Hat Left = left
+* Hat Right = right
+* Select / Y = select
+* Start / X = start
+* B = opt
+* A = edit
 
 ## Config
 
